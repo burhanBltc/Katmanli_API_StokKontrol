@@ -1,0 +1,65 @@
+﻿@model IEnumerable<_01_Stok.Entities.Models.Concrete.Category>
+
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>List</h1>
+
+<p>
+    <a asp-action="Create" method="post">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+     
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+      
+            <td>
+                <a asp-action="Update" asp-route-id="@item.ID" class="btn btn-outline-success" >GÜNCELLE</a>
+                    @if (item.IsActive)
+                    {
+                        <a asp-action="MakePassive" asp-route-id="@item.ID" class="btn btn-outline-danger">PASİF ET</a>
+                    }
+                    else
+                    {
+                        <a asp-action="MakeActive" asp-route-id="@item.ID" class="btn btn-outline-warning">AKTİF ET</a>
+                    }
+
+@*              @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

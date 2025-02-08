@@ -1,0 +1,6 @@
+@_03_Stok.API_HostAddress = http://localhost:5056
+
+GET {{_03_Stok.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

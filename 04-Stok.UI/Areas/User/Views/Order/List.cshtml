@@ -1,0 +1,49 @@
+﻿@using _01_Stok.Entities.Models.Concrete
+@model List<Order>
+
+@foreach (Order item in Model)
+{
+    <div class="card">
+        <div class="card-body col-md-6">
+            <h3>ORDER ID: @item.ID</h3>
+            <p><b>Order Date: @item.AddedDate</b></p>
+            <p><b>Customer Name : @item.User.FirstName @item.User.LastName</b></p>
+            <a asp-action="DeleteOrder" method="post" asp-route-id="@item.ID" class="btn btn-warning">Siparişi Sil</a>
+        </div>
+    </div>
+    <hr />
+    <form asp-action="UpdateOrderDetail">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Prdoduct Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @for (int i = 0; i < item.OrderDetails.Count; i++)
+                {
+                    <tr>
+                        <td>@item.OrderDetails[i].Product.ProductName</td>
+                        <td>@item.OrderDetails[i].Quantity</td>
+                        <td>@item.OrderDetails[i].UnitPrice</td>
+                        <td>@(item.OrderDetails[i].Quantity * item.OrderDetails[i].UnitPrice)</td>
+                        <td>
+                            <a asp-action="Update" asp-route-id="@item.OrderDetails[i].ID" type="submit" class="btn btn-warning">Update</a>
+                            <a asp-action="Delete" asp-route-id="@item.OrderDetails[i].ID" type="submit" class="btn btn-warning">Delete</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </form>
+
+
+}
